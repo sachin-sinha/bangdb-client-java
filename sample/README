@@ -1,0 +1,28 @@
+Install the libbangdb-client-java.so.2.0 [ present in ../lib folder ] by simply
+add a soft link or copying the lib in /usr/local/lib
+
+sudo ln -sf /<PATH_TO_BASE_FOLDER>/lib/libbangdb-client-java.so.2.0 /usr/local/lib/libbangdb-client-java.so.0
+
+Build sample app
+----------------
+
+You may write your applications using the client.
+Please see getting started with client at bangdb.com/developer
+
+However you may simply get started by building the sample app provided here
+
+You may use following to build sample.cpp and run [ pls do start server before running it ]
+
+compile ...
+	mvn package
+
+run...
+	mvn exec:java  -Dexec.mainClass=test.Main
+
+Note: bangdb.config is required to run any app (keep in the same folder as exe)
+
+Use the detail API and dev section at the bangdb.com
+
+
+Please refer www.bangdb.com/developer section to get most of the detail info as needed
+Please feel free to write to me at sachin@bangdb.com for any info, clarity, feedback etc.

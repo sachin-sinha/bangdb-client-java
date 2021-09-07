@@ -1,0 +1,187 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bangdb</groupId>
+    <artifactId>bangdb-client-java</artifactId>
+    <version>2.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>bangdb java client</name>
+    <description>
+        BangDB java client, a lightweight client for BangDB Server 2.0
+    </description>
+
+    <url>https://github.com/sachin-sinha/bangdb-client-java</url>
+
+    <licenses>
+        <license>
+            <name>The BSD License, Version 3</name>
+            <url>https://bangdb.com/license/</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Sachin Sinha</name>
+            <email>sachin@bangdb.com</email>
+            <organization>BangDB (IQLECT)</organization>
+            <organizationUrl>https://www.bangdb.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+		<groupId>org.json</groupId>
+		<artifactId>json</artifactId>
+		<version>20190722</version>
+        </dependency>
+    </dependencies>
+
+    <scm>
+        <connection>scm:git:git://github.com/sachin-sinha/bangdb-client-java.git</connection>
+        <developerConnection>scm:git:ssh://github.com:sachin-sinha/bangdb-client-java.git</developerConnection>
+        <url>http://github.com/sachin-sinha/bangdb-client-java/tree/master</url>
+    </scm>
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+	    <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+	    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-source-plugin</artifactId>
+		<version>3.2.1</version>
+		<configuration>
+			<attach>true</attach>
+		</configuration>
+		<executions>
+			<execution>
+				<id>attach-sources</id>
+				<goals>
+					<goal>jar-no-fork</goal>
+				</goals>
+			</execution>
+		</executions>
+	    </plugin>
+
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<version>2.10.4</version>
+			<configuration>
+				<aggregate>true</aggregate>
+				<additionalparam>-Xdoclint:none</additionalparam>
+				<sourcepath>src/main/java</sourcepath>
+			</configuration>
+			<executions>
+				<execution>
+					<id>attach-javadoc</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+	    </plugin>
+
+		<plugin>
+          		<artifactId>maven-clean-plugin</artifactId>
+          		<version>2.5</version>
+        	</plugin>
+        		
+        	<plugin>
+          		<artifactId>maven-deploy-plugin</artifactId>
+          		<version>2.7</version>
+        	</plugin>
+
+		<plugin>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>3.0.2</version>
+			<configuration>
+				<archive>
+					<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					<manifestEntries>
+						<Automatic-Module-Name>${bangdb.module.name}</Automatic-Module-Name>
+					</manifestEntries>
+				</archive>
+			</configuration>
+		</plugin>
+
+		<plugin>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>maven-bundle-plugin</artifactId>
+			<version>4.2.1</version>
+			<executions>
+				<execution>
+					<id>bundle-manifest</id>
+					<phase>process-classes</phase>
+					<goals>
+						<goal>manifest</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        -->
+    </properties> 
+
+</project>
